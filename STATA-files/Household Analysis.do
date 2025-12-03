@@ -5,7 +5,7 @@
 * setting up log file
 set logtype text
 capture log close
-log using "G:\ECON422 India Poverty Reduction Final Project", replace
+log using "G:\ECON422 India Poverty Reduction Final Project Household Analysis", replace
 
 * refreshing STATA
 clear all
@@ -27,10 +27,9 @@ summarize treatment if country == 4
 * subset data set to just India
 keep if country == 4
 
-* random assignment check for household size
-summarize control_h_hhsize if treatment == 1
-summarize control_h_hhsize if treatment == 0
-ttest control_h_hhsize, by(treatment)
+* random assignment check for asset value index of households
+summarize asset_hh_index_bsl if treatment == 1
+summarize asset_hh_index_bsl if treatment == 0
 
 * random assignment check for total monthly spending
 summarize ctotal_pcmonth_bsl if treatment == 1
@@ -45,15 +44,6 @@ regress asset_hh_index_fup treatment asset_hh_index_bsl, r
 regress ctotal_pcmonth_end treatment ctotal_pcmonth_bsl, r
 regress ctotal_pcmonth_fup treatment ctotal_pcmonth_bsl, r
 
-* switch data set
-use "G:\pooled_mb.dta", clear
-
-* summarize new data set
-describe
-
-* subset data set to just India
-keep if country == 4
-
 * translating log file to pdf
 log close
-translate "G:\ECON422 India Poverty Reduction Final Project.log" "G:\ECON422 India Poverty Reduction Final Project.pdf", replace
+translate "G:\ECON422 India Poverty Reduction Final Project Household Analysis.log" "G:\ECON422 India Poverty Reduction Final Project Household Analysis.pdf", replace
