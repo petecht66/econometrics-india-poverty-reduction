@@ -1,5 +1,4 @@
 * Peter Chapman, Joshua Koppel, Jackson Bay
-* Peter Chapman, Joshua Koppel, Jackson Bay
 * ECON422: Econometrics and Causal Analysis
 * India Poverty Reduction Final Project
 
@@ -32,6 +31,14 @@ ttest percep_health_bsl, by(treatment)
 
 * random assignment check for baseline perceived life status
 ttest percep_life_bsl, by(treatment)
+
+* create regressions for health index
+regress index_health_end treatment index_health_bsl, r
+regress index_health_fup treatment index_health_bsl, r
+
+* create regressions for political involvement index
+regress index_political_end treatment index_political_bsl, r
+regress index_political_fup treatment index_political_bsl, r
 
 * translating log file to pdf
 log close
