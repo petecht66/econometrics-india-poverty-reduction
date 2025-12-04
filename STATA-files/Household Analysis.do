@@ -27,22 +27,23 @@ summarize treatment if country == 4
 * subset data set to just India
 keep if country == 4
 
-* random assignment check for asset value index of households
-summarize asset_hh_index_bsl if treatment == 1
-summarize asset_hh_index_bsl if treatment == 0
+* create variable for total monthly income baseline
+gen total_baseline_income = (iagri_month_bsl + ibusiness_month_bsl + ipaidlabor_month_bsl)
 
-* random assignment check for total monthly spending
-summarize ctotal_pcmonth_bsl if treatment == 1
-summarize ctotal_pcmonth_bsl if treatment == 0
+* random assignment check for total monthly income baseline
+ttest total_baseline_income, by(treatment)
+
+* random assignment check for total asset index
+ttest asset_index_bsl, by(treatment)
+
+* random assignment check for total asset index of the household
+ttest asset_hh_index_bsl, by(treatment)
+
+* random assignment check for total monthly spending per capita
 ttest ctotal_pcmonth_bsl, by(treatment)
 
-* regression for asset value index of households
-regress asset_hh_index_end treatment asset_hh_index_bsl, r
-regress asset_hh_index_fup treatment asset_hh_index_bsl, r
-
-* regression for total monthly spending
-regress ctotal_pcmonth_end treatment ctotal_pcmonth_bsl, r
-regress ctotal_pcmonth_fup treatment ctotal_pcmonth_bsl, r
+* random assignment check for food security index
+ttest index_foodsecurity_bsl, by(treatment)
 
 * translating log file to pdf
 log close
