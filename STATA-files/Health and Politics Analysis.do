@@ -15,13 +15,34 @@ set more off
 use "G:\pooled_mb.dta"
 
 * summarize data set
-describe
-
-* summary statistics for treatment for just India
-summarize treatment if control_dcountry4 == 1
+* describe
 
 * keep just data points from India
 keep if country == 4
+
+* summary statistics and random assignment check for baseline index health
+summarize index_health_bsl
+ttest index_health_bsl, by(treatment)
+
+* summary statistics and random assignment check for baseline political involvement index
+summarize index_political_bsl
+ttest index_political_bsl, by(treatment)
+
+* summary statistics and random assignment check for baseline perceived health status
+summarize percep_health_bsl
+ttest percep_health_bsl, by(treatment)
+
+* summary statistics and random assignment check for baseline perceived life status
+summarize percep_life_bsl
+ttest percep_life_bsl, by(treatment)
+
+* create regressions for health index
+regress index_health_end treatment index_health_bsl, r
+regress index_health_fup treatment index_health_bsl, r
+
+* create regressions for political involvement index
+regress index_political_end treatment index_political_bsl, r
+regress index_political_fup treatment index_political_bsl, r
 
 * translating log file to pdf
 log close
