@@ -15,7 +15,7 @@ set more off
 use "G:\pooled_hh.dta"
 
 * summarize data set
-describe
+* describe
 
 * summarizing treatment and country variables
 summarize treatment
@@ -30,19 +30,24 @@ keep if country == 4
 * create variable for total monthly income baseline
 gen total_baseline_income = (iagri_month_bsl + ibusiness_month_bsl + ipaidlabor_month_bsl)
 
-* random assignment check for total monthly income baseline
+* summary statistics and random assignment check for total monthly income baseline
+summarize total_baseline_income
 ttest total_baseline_income, by(treatment)
 
-* random assignment check for total asset index
+* summary statistics and random assignment check for total asset index
+summarize asset_index_bsl
 ttest asset_index_bsl, by(treatment)
 
-* random assignment check for total asset index of the household
+* summary statistics and random assignment check for total asset index of the household
+summarize asset_hh_index_bsl
 ttest asset_hh_index_bsl, by(treatment)
 
-* random assignment check for total monthly spending per capita
+* summary statistics and random assignment check for total monthly spending per capita
+summarize ctotal_pcmonth_bsl
 ttest ctotal_pcmonth_bsl, by(treatment)
 
-* random assignment check for food security index
+* summary statistics and random assignment check for food security index
+summarize index_foodsecurity_bsl
 ttest index_foodsecurity_bsl, by(treatment)
 
 * create variables for total monthly income: endline-1 and endline-2

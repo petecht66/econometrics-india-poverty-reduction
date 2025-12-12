@@ -15,21 +15,25 @@ set more off
 use "G:\pooled_mb.dta"
 
 * summarize data set
-describe
+* describe
 
 * keep just data points from India
 keep if country == 4
 
-* random assignment check for baseline index health
+* summary statistics and random assignment check for baseline index health
+summarize index_health_bsl
 ttest index_health_bsl, by(treatment)
 
-* random assignment check for baseline political involvement index
+* summary statistics and random assignment check for baseline political involvement index
+summarize index_political_bsl
 ttest index_political_bsl, by(treatment)
 
-* random assignment check for baseline perceived health status
+* summary statistics and random assignment check for baseline perceived health status
+summarize percep_health_bsl
 ttest percep_health_bsl, by(treatment)
 
-* random assignment check for baseline perceived life status
+* summary statistics and random assignment check for baseline perceived life status
+summarize percep_life_bsl
 ttest percep_life_bsl, by(treatment)
 
 * create regressions for health index
